@@ -57,11 +57,11 @@ public class AccountController {
 				usersService.registUser(userInfo);
 				return "redirect:/login";
 			} else {
-				model.addAttribute("errorMassage", "半角英数字8文字以上で入力してください。");
+				model.addAttribute("errorMassage", "確認用パスワードと一致しません。");
 				return "createAccount";
 			}
 		} else {
-			model.addAttribute("errorMassage", "確認用パスワードと一致しません。");
+			model.addAttribute("errorMassage", "半角英数字8文字以上で入力してください。");
 			return "createAccount";
 		}
 	}
