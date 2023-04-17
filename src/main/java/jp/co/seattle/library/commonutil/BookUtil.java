@@ -3,6 +3,7 @@ package jp.co.seattle.library.commonutil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -33,13 +34,11 @@ public class BookUtil {
 			errorList.add(REQUIRED_ERROR);
 		}
 		// ISBNのバリデーションチェック
-		if (isValidIsbn(bookInfo.getIsbn())) {
-		} else {
+		if (!isValidIsbn(bookInfo.getIsbn())) {
 			errorList.add(ISBN_ERROR);
 		}
 		// 出版日の形式チェック
-		if (checkDate(bookInfo.getPublishDate())) {
-		} else {
+		if (!checkDate(bookInfo.getPublishDate())) {
 			errorList.add(PUBLISHDATE_ERROR);
 		}
 		return errorList;
@@ -56,14 +55,13 @@ public class BookUtil {
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			if (publishDate.length() > 0) {
-				if (publishDate.length() == 8) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
+
+			Date date = formatter.parse(publishDate);
+			String strdate = formatter.format(date);
+			if (publishDate.equals(strdate)) {
 				return true;
+			} else {
+				return false;
 			}
 		} catch (Exception p) {
 			p.printStackTrace();
