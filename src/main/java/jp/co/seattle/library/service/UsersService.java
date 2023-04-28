@@ -20,6 +20,7 @@ public class UsersService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+
 	/**
 	 * ユーザー情報を登録する
 	 * 
